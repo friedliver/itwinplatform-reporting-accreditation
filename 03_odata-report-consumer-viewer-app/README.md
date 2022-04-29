@@ -9,10 +9,10 @@ Prior to running the app, you will need to add OIDC client configuration to the 
 
 ```
 # ---- Authorization Client Settings ----
-IMJS_AUTH_CLIENT_CLIENT_ID=""
-IMJS_AUTH_CLIENT_REDIRECT_URI=""
-IMJS_AUTH_CLIENT_LOGOUT_URI=""
-IMJS_AUTH_CLIENT_SCOPES ="insights:read imodels:read imodelaccess:read itwinjs"
+IMJS_AUTH_CLIENT_CLIENT_ID = ""
+IMJS_AUTH_CLIENT_REDIRECT_URI = ""
+IMJS_AUTH_CLIENT_LOGOUT_URI = ""
+IMJS_AUTH_CLIENT_SCOPES = "insights:read imodels:read imodelaccess:read"
 ```
 
 - You can generate a [test client](https://developer.bentley.com/tutorials/web-application-quick-start/#2-register-an-application) to get started.
