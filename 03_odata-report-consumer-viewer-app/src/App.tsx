@@ -18,6 +18,7 @@ import {
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { history } from "./history";
+import { ReportingWidgetProvider } from "./ReportingWidget";
 
 const App: React.FC = () => {
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
@@ -138,6 +139,7 @@ const App: React.FC = () => {
         authClient={authClient}
         viewCreatorOptions={viewCreatorOptions}
         enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/desktop-viewer-react)
+        uiProviders={[new ReportingWidgetProvider()]}
       />
     </div>
   );
