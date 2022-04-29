@@ -1,7 +1,8 @@
 
 import { AbstractWidgetProps, StagePanelLocation, StagePanelSection, UiItemsProvider, WidgetState } from "@itwin/appui-abstract";
 import { useActiveIModelConnection } from "@itwin/appui-react";
-import { IModelApp } from "@itwin/core-frontend";
+import { ColorDef, FeatureOverrideType } from "@itwin/core-common";
+import { EmphasizeElements, IModelApp, ViewChangeOptions } from "@itwin/core-frontend";
 import { ODataItem, Report, ReportingClient } from "@itwin/insights-client";
 import { Table } from "@itwin/itwinui-react";
 import React, { useEffect, useState, useMemo } from "react";
@@ -72,10 +73,10 @@ export const ReportingWidget: React.FunctionComponent = () => {
     }
     return [
       {
-        Header: "Data",
-        columms: cols
-      }
-    ]
+        Header: `Data Rows (${data?.length})`,
+        columns: cols,
+      },
+    ];
   }, [data]);
 
   const onReportRowClick = async (row: Report) => {
@@ -109,6 +110,29 @@ export const ReportingWidget: React.FunctionComponent = () => {
       setData(rows);
       setActiveEntity(entity);
       setViewState(ViewState.Data);
+    }
+  };
+
+  const onDataRowClick = async (instanceId: string) => {
+    if (instanceId && IModelApp.viewManager.selectedView) {
+      const vp = IModelApp.viewManager.selectedView;
+      const emph = EmphasizeElements.getOrCreate(vp);
+
+      emph.clearEmphasizedElements(vp);
+      emph.clearOverriddenElements(vp);
+      emph.overrideElements(
+        [instanceId],
+        vp,
+        ColorDef.red,
+        FeatureOverrideType.ColorOnly,
+        true
+      );
+      emph.wantEmphasis = true;
+      emph.emphasizeElements([instanceId], vp);
+  
+      const viewChangeOpts: ViewChangeOptions = {};
+      viewChangeOpts.animateFrustumChange = true;
+      await vp.zoomToElements([instanceId], { ...viewChangeOpts })
     }
   };
 
@@ -161,12 +185,15 @@ export const ReportingWidget: React.FunctionComponent = () => {
       }
       {
         data && viewState === ViewState.Data &&
-        <div className="entity-table">
+        <div className="data-table">
           <Table
             columns={dataColumns}
             data={data as []}
             emptyTableContent="No data..."
             density="extra-condensed"
+            onRowClick={(_, row) => {
+              onDataRowClick((row.original as any)?.ECInstanceId);
+            }}
           />
         </div>
       }
