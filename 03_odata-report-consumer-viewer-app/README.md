@@ -1,4 +1,5 @@
 # Getting Started with the iTwin Viewer Create React App Template
+Bare-bones iTwin Viewer Application with a custom widget that fetches iTwin Reporting Platform Reports, navigates through Report contents, and demonstrates basic data binding between a Report and the 3D model. This app is based on the [Web Viewer tutorial](https://www.itwinjs.org/learning/tutorials/develop-web-viewer/#developing-a-web-viewer) with minimal modifications.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -11,7 +12,7 @@ Prior to running the app, you will need to add OIDC client configuration to the 
 IMJS_AUTH_CLIENT_CLIENT_ID=""
 IMJS_AUTH_CLIENT_REDIRECT_URI=""
 IMJS_AUTH_CLIENT_LOGOUT_URI=""
-IMJS_AUTH_CLIENT_SCOPES =""
+IMJS_AUTH_CLIENT_SCOPES ="insights:read imodels:read imodelaccess:read itwinjs"
 ```
 
 - You can generate a [test client](https://developer.bentley.com/tutorials/web-application-quick-start/#2-register-an-application) to get started.

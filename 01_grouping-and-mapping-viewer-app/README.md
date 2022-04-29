@@ -1,4 +1,5 @@
 # Getting Started with the iTwin Viewer Create React App Template
+Bare-bones iTwin Viewer Application using the [Grouping & Mapping Widget](https://www.npmjs.com/package/@itwin/grouping-mapping-widget). This app is based on the [Web Viewer tutorial](https://www.itwinjs.org/learning/tutorials/develop-web-viewer/#developing-a-web-viewer) with minimal modifications to add the Grouping & Mapping Widget to the app. The widget UI can be used to easily and conveniently manage your iTwin Reporting Platform Mapping, Groups and Properties.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
