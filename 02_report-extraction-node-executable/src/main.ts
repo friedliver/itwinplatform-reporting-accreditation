@@ -32,7 +32,7 @@ const argv = minimist(process.argv.slice(2));
     console.log(` -- job: ${extraction.run.id}`);
     // poll for status
     let state: string | undefined = "";
-    while (state !== "Completed") {
+    while (state !== "Succeeded") {
       const status = await client.getExtractionStatus(token, extraction.run.id);
       state = status?.status?.state;
       console.log(` ... waiting -- ${status.status?.state}:${status.status?.reason}`);
