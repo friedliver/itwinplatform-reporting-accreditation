@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 import { ParsedArgs } from "minimist";
 
 export interface EnvConfig {
+  IMODEL_ID: string;
   IMS_AUTHORITY: string;
   CLIENT_ID: string;
   CLIENT_SECRET: string;
@@ -9,6 +10,11 @@ export interface EnvConfig {
 }
 
 export const loadConfig = (argv: ParsedArgs): EnvConfig => {
+  // Load command line args
+  const imodelid = argv.imodelid;
+
+  if (!imodelid) throw new Error("Missing required arg: IMODEL_ID");
+
   // Load environment variables from .env file
   const result = dotenv.config();
   if (result.error)
@@ -20,6 +26,7 @@ export const loadConfig = (argv: ParsedArgs): EnvConfig => {
   if (!process?.env?.SCOPES) throw new Error("Missing required environment variable: SCOPES");
 
   return {
+    IMODEL_ID: imodelid,
     IMS_AUTHORITY: process.env.IMS_AUTHORITY,
     CLIENT_ID: process.env.CLIENT_ID,
     CLIENT_SECRET: process.env.CLIENT_SECRET,
